@@ -1,21 +1,43 @@
-#include <"stdio.h">
-#include <"stdlib.h">
 #include "sort.h"
 
 /**
- * main - Entry point
- *
- * Return: Always 0
+ * bubble_sort - Sorts an array of integers in ascending order using
+ *               the Bubble sort algorithm.
+ * @array: The array to be sorted.
+ * @size: Number of elements in @array.
  */
-int main(void)
+void bubble_sort(int *array, size_t size)
 {
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    size_t i, j;
+    int temp;
+    int swapped;
 
-    print_array(array, n);
-    printf("\n");
-    bubble_sort(array, n);
-    printf("\n");
-    print_array(array, n);
-    return (0);
+    if (array == NULL || size < 2)
+        return;
+
+    for (i = 0; i < size - 1; i++)
+    {
+        swapped = 0;
+
+        for (j = 0; j < size - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                /* Swap the elements */
+                temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+
+                /* Set swapped flag to true */
+                swapped = 1;
+
+                /* Print array after each swap */
+                print_array(array, size);
+            }
+        }
+
+        /* If no two elements were swapped, the array is already sorted */
+        if (swapped == 0)
+            break;
+    }
 }
